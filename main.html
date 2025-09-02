@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dina</title>
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* BODY - Gradient animé plus sophistiqué */
+        body {
+            background: linear-gradient(-45deg, 
+                #ff9a9e, #fecfef, #fecfef, #ffd1dc, 
+                #ffc1cc, #ffb6c1, #dda0dd, #ffc0cb);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Éléments de fond décoratifs */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            z-index: -2;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::before {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 77, 109, 0.3), transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(221, 160, 221, 0.3), transparent 70%);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        /* Container principal avec glassmorphism avancé */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.15),
+                0 18px 60px rgba(31, 38, 135, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.4), 
+                transparent);
+            z-index: 1;
+        }
+
+        /* HERO avec glassmorphism */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 30px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+            object-fit: cover;
+            box-shadow: 
+                0 20px 60px rgba(255, 77, 109, 0.3),
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-photo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .hero-photo:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 
+                0 30px 80px rgba(255, 77, 109, 0.4),
+                0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-photo:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #ff4d6d;
+            margin-bottom: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4d6d, #ff1a75, #e91e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text p {
+            color: #b3003b;
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* SOUVENIRS avec cards glassmorphism */
+        .souvenirs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 60px 30px;
+            background: rgba(255, 255, 255, 0.03);
+            align-items: stretch;
+        }
+        
+        .souvenirs a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .souvenir {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.12),
+                0 2px 8px rgba(31, 38, 135, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .souvenir::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .souvenir:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 
+                0 20px 60px rgba(31, 38, 135, 0.2),
+                0 8px 25px rgba(31, 38, 135, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        .souvenir:hover::before {
+            left: 100%;
+        }
+
+        .souvenir h2 {
+            color: #ff4d6d;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff4d6d, #ff1a75);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .souvenir p {
+            color: rgba(179, 0, 59, 0.9);
+            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        /* MESSAGE SPECIAL */
+        .message {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 60px 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .message h2 {
+            color: #ff3366;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 25px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff3366, #ff1a75, #e91e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);
+        }
+
+        .message p {
+            color: rgba(153, 0, 51, 0.9);
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* FALLING HEARTS améliorés */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .hearts span {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 26, 117, 0.6);
+            animation: fall 8s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            filter: blur(0.5px);
+        }
+
+        .hearts span:nth-child(1) { left: 5%; animation-delay: 0s; font-size: 20px; }
+        .hearts span:nth-child(2) { left: 15%; animation-delay: 1s; font-size: 28px; }
+        .hearts span:nth-child(3) { left: 25%; animation-delay: 2s; font-size: 22px; }
+        .hearts span:nth-child(4) { left: 35%; animation-delay: 3s; font-size: 26px; }
+        .hearts span:nth-child(5) { left: 45%; animation-delay: 4s; font-size: 24px; }
+        .hearts span:nth-child(6) { left: 55%; animation-delay: 5s; font-size: 20px; }
+        .hearts span:nth-child(7) { left: 65%; animation-delay: 6s; font-size: 30px; }
+        .hearts span:nth-child(8) { left: 75%; animation-delay: 7s; font-size: 22px; }
+        .hearts span:nth-child(9) { left: 85%; animation-delay: 8s; font-size: 25px; }
+        .hearts span:nth-child(10) { left: 95%; animation-delay: 9s; font-size: 21px; }
+
+        @keyframes fall {
+            0% { 
+                top: -50px; 
+                opacity: 0; 
+                transform: translateX(0) rotate(0deg) scale(0.5); 
+            }
+            10% { 
+                opacity: 1; 
+                transform: translateX(0) rotate(45deg) scale(1); 
+            }
+            90% { 
+                opacity: 0.7; 
+                transform: translateX(40px) rotate(315deg) scale(0.8); 
+            }
+            100% { 
+                top: calc(100vh + 50px); 
+                opacity: 0; 
+                transform: translateX(60px) rotate(360deg) scale(0.3); 
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .container {
+                border-radius: 24px;
+            }
+            
+            .hero {
+                padding: 40px 20px;
+            }
+            
+            .souvenirs {
+                padding: 40px 20px;
+                gap: 20px;
+            }
+            
+            .souvenir {
+                padding: 24px;
+                border-radius: 20px;
+            }
+            
+            .message {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-photo {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .souvenirs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Conteneur principal -->
+    <div class="container">
+        <!-- Section Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <img src="IMG_4843 (2).jpg" alt="Photo" class="hero-photo">
+                <div class="hero-text">
+                    <h1>Ma Dina 💖</h1>
+                    <p>T'es la meilleure des copines t'es vraiment exceptionnelle tu le sais princesse</p>
+                    <p>Tellement jolie que tu devrais être considérée comme une oeuvre d'art</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Souvenirs -->
+        <section class="souvenirs">
+            <a href="souvenirs/cinema.html">
+                <div class="souvenir">
+                    <h2>Notre Premiere sortie</h2>
+                    <p>Je me rappelle encore du jour où tu m'as invité au cinéma, c'était vraiment cool !</p>
+                </div>
+            </a>
+            <a href="souvenirs/resto.html">
+                <div class="souvenir">
+                    <h2>Notre premier resto</h2>
+                    <p>Je me souviens de notre premier resto ensemble, rempli de rires.</p>
+                </div>
+            </a>
+            <a href="souvenirs/anniversaire.html">
+                <div class="souvenir">
+                    <h2>Nos 1 an d'anniversaire</h2>
+                    <p>Je me rappelle de notre première anniversaire ensemble, la plus belle journée de ma vie jusqu'à là.</p>
+                </div>
+            </a>
+        </section>
+
+        <!-- Message spécial -->
+        <section class="message">
+            <h2>Pour mon Bb</h2>
+            <p>
+                Depuis le premier jour où je t'ai rencontré, jusqu'aujourd'hui je t'aime vraiment honnêtement et sincèrement. 
+                Malgré mes bêtises tu n'arrêtes pas de m'aimer
+                et je te remercie pour ça. Tu es vraiment une fille exceptionnelle, gentille, douce, attentionnée, drôle, belle et intelligente.
+                Je t'aime mon coeur je veux finir ma vie avec toi princesse.
+            </p>
+        </section>
+    </div>
+
+    <!-- Cœurs qui tombent -->
+    <div class="hearts">
+        <span>💖</span>
+        <span>💕</span>
+        <span>💝</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>💕</span>
+        <span>💝</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>💕</span>
+        <span>💗</span>
+        <span>💖</span>
+        <span>💕</span>
+    </div>
+</body>
+</html>

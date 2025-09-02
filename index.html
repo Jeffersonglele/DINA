@@ -3,468 +3,514 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dina</title>
+    <title>Connexion - Design Glassmorphisme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* RESET */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        /* BODY - Gradient animé plus sophistiqué */
-        body {
-            background: linear-gradient(-45deg, 
-                #ff9a9e, #fecfef, #fecfef, #ffd1dc, 
-                #ffc1cc, #ffb6c1, #dda0dd, #ffc0cb);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            overflow-x: hidden;
-            min-height: 100vh;
-            padding: 20px;
-            position: relative;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Éléments de fond décoratifs */
-        body::before,
-        body::after {
-            content: '';
-            position: fixed;
-            border-radius: 50%;
-            z-index: -2;
-            opacity: 0.1;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        body::before {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 77, 109, 0.3), transparent 70%);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        body::after {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(221, 160, 221, 0.3), transparent 70%);
-            bottom: -150px;
-            right: -150px;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-30px) scale(1.1); }
-        }
-
-        /* Container principal avec glassmorphism avancé */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 32px;
-            border: 2px solid rgba(255, 255, 255, 0.18);
-            box-shadow: 
-                0 8px 32px rgba(31, 38, 135, 0.15),
-                0 18px 60px rgba(31, 38, 135, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.4), 
-                transparent);
-            z-index: 1;
-        }
-
-        /* HERO avec glassmorphism */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 30px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-photo {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            margin-bottom: 30px;
-            object-fit: cover;
-            box-shadow: 
-                0 20px 60px rgba(255, 77, 109, 0.3),
-                0 8px 25px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-photo::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .hero-photo:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 
-                0 30px 80px rgba(255, 77, 109, 0.4),
-                0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .hero-photo:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) translateX(100%);
-        }
-
-        .hero-text h1 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: #ff4d6d;
-            margin-bottom: 15px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff4d6d, #ff1a75, #e91e63);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 12px rgba(255, 77, 109, 0.3);
-            letter-spacing: -0.02em;
-        }
-
-        .hero-text p {
-            color: #b3003b;
-            font-size: 1.3rem;
-            font-weight: 400;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        /* SOUVENIRS avec cards glassmorphism */
-        .souvenirs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 60px 30px;
-            background: rgba(255, 255, 255, 0.03);
-            align-items: stretch;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .souvenirs a {
-            text-decoration: none;
-            color: inherit;
+        body {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: url('IMG_4843 (2).jpg') no-repeat center center;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            overflow: auto;
         }
-
-        .souvenir {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 
-                0 8px 32px rgba(31, 38, 135, 0.12),
-                0 2px 8px rgba(31, 38, 135, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        
+        /* Partie formulaire à gauche */
+        .form-section {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        
+        .glass-card {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: white;
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hint {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
-            height: 100%;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
         }
-
-        .souvenir::before {
+        
+        button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.6s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
         }
-
-        .souvenir:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(31, 38, 135, 0.2),
-                0 8px 25px rgba(31, 38, 135, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.18);
-        }
-
-        .souvenir:hover::before {
+        
+        button:hover::before {
             left: 100%;
         }
-
-        .souvenir h2 {
-            color: #ff4d6d;
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #ff4d6d, #ff1a75);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        .button-text {
+            transition: transform 0.3s ease;
         }
-
-        .souvenir p {
-            color: rgba(179, 0, 59, 0.9);
-            line-height: 1.6;
-            font-size: 1rem;
-            font-weight: 400;
-            margin: 0;
-            flex-grow: 1;
+        
+        .button-icon {
+            transition: transform 0.3s ease;
         }
-
-        /* MESSAGE SPECIAL */
-        .message {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 60px 30px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        
+        button:hover .button-text {
+            transform: translateX(5px);
+        }
+        
+        button:hover .button-icon {
+            transform: translateX(5px);
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .links a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .links a i {
+            transition: transform 0.3s ease;
+        }
+        
+        .links a:hover i {
+            transform: scale(1.2);
+        }
+        
+        .forgot-password {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .forgot-password:hover {
+            background: rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+        }
+        
+        .links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* Partie design à droite */
+        .design-section {
+            width: 60%;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-
-        .message h2 {
-            color: #ff3366;
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            margin-bottom: 25px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ff3366, #ff1a75, #e91e63);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);
+        
+        .design-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 600px;
         }
-
-        .message p {
-            color: rgba(153, 0, 51, 0.9);
+        
+        .design-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .welcome-message {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .welcome-message p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin: 0 0 1rem 0;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .welcome-message p:last-child {
+            margin-bottom: 0;
             font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.7;
-            font-weight: 400;
+            opacity: 0.9;
         }
-
-        /* FALLING HEARTS améliorés */
-        .hearts {
+        
+        /* Style de la modale */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
-
-        .hearts span {
+        
+        .modal-content {
+            background: rgba(40, 40, 60, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: modalFadeIn 0.4s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-close {
             position: absolute;
+            top: 15px;
+            right: 20px;
             font-size: 24px;
-            color: rgba(255, 26, 117, 0.6);
-            animation: fall 8s linear infinite;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-            filter: blur(0.5px);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: color 0.3s;
         }
-
-        .hearts span:nth-child(1) { left: 5%; animation-delay: 0s; font-size: 20px; }
-        .hearts span:nth-child(2) { left: 15%; animation-delay: 1s; font-size: 28px; }
-        .hearts span:nth-child(3) { left: 25%; animation-delay: 2s; font-size: 22px; }
-        .hearts span:nth-child(4) { left: 35%; animation-delay: 3s; font-size: 26px; }
-        .hearts span:nth-child(5) { left: 45%; animation-delay: 4s; font-size: 24px; }
-        .hearts span:nth-child(6) { left: 55%; animation-delay: 5s; font-size: 20px; }
-        .hearts span:nth-child(7) { left: 65%; animation-delay: 6s; font-size: 30px; }
-        .hearts span:nth-child(8) { left: 75%; animation-delay: 7s; font-size: 22px; }
-        .hearts span:nth-child(9) { left: 85%; animation-delay: 8s; font-size: 25px; }
-        .hearts span:nth-child(10) { left: 95%; animation-delay: 9s; font-size: 21px; }
-
-        @keyframes fall {
-            0% { 
-                top: -50px; 
-                opacity: 0; 
-                transform: translateX(0) rotate(0deg) scale(0.5); 
-            }
-            10% { 
-                opacity: 1; 
-                transform: translateX(0) rotate(45deg) scale(1); 
-            }
-            90% { 
-                opacity: 0.7; 
-                transform: translateX(40px) rotate(315deg) scale(0.8); 
-            }
-            100% { 
-                top: calc(100vh + 50px); 
-                opacity: 0; 
-                transform: translateX(60px) rotate(360deg) scale(0.3); 
-            }
+        
+        .modal-close:hover {
+            color: #fff;
         }
-
+        
+        .modal h3 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hint-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .hint-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .hint-item strong {
+            color: #ff8e8e;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        /* Éléments décoratifs */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            right: 100px;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 50px;
+            left: 70px;
+        }
+        
+        .circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            right: 200px;
+        }
+        
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             body {
-                padding: 15px;
+                flex-direction: column;
             }
             
-            .container {
-                border-radius: 24px;
+            .form-section, .design-section {
+                width: 100%;
             }
             
-            .hero {
-                padding: 40px 20px;
+            .design-section {
+                padding: 2rem;
+                min-height: 40vh;
             }
             
-            .souvenirs {
-                padding: 40px 20px;
-                gap: 20px;
+            .design-content {
+                max-width: 100%;
             }
             
-            .souvenir {
-                padding: 24px;
-                border-radius: 20px;
+            .design-content h1 {
+                font-size: 2rem;
             }
             
-            .message {
-                padding: 40px 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-photo {
-                width: 180px;
-                height: 180px;
-            }
-            
-            .souvenirs {
-                grid-template-columns: 1fr;
+            .glass-card {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Conteneur principal -->
-    <div class="container">
-        <!-- Section Hero -->
-        <section class="hero">
-            <div class="hero-content">
-                <img src="IMG_4843 (2).jpg" alt="Photo" class="hero-photo">
-                <div class="hero-text">
-                    <h1>Ma Dina 💖</h1>
-                    <p>T'es la meilleure des copines t'es vraiment exceptionnelle tu le sais princesse</p>
-                    <p>Tellement jolie que tu devrais être considérée comme une oeuvre d'art</p>
+    <!-- Section formulaire à gauche -->
+    <section class="form-section">
+        <div class="glass-card">
+            <h2>Connexion</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="username" name="username" placeholder="Entre ton prénom ici..." required>
+                    <div class="hint">(4 lettres, commence par un D)</div>
                 </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <i class="fas fa-heart input-icon"></i>
+                    <input type="password" id="password" name="password" placeholder="JJ-MM-AAAA" required>
+                    <div class="hint">(Le jour où tout a commencé pour nous)</div>
+                </div>
+                <button type="submit">
+                    <span class="button-text">Se connecter</span>
+                    <i class="fas fa-arrow-right button-icon"></i>
+                </button>
+                
+                <div class="links">
+                    <a href="#" class="forgot-password" id="hintButton">
+                        <i class="fas fa-lightbulb"></i> Besoin d'aide ?
+                    </a>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Section design à droite -->
+    <section class="design-section">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+        
+        <div class="design-content">
+            <div class="welcome-message">
+                <p>Bienvenue ma petite Dina 🌹</p>
+                <p>Tu peux vite trouver les identifiants 😁</p>
             </div>
-        </section>
-
-        <!-- Section Souvenirs -->
-        <section class="souvenirs">
-            <a href="souvenirs/cinema.html">
-                <div class="souvenir">
-                    <h2>Notre Premiere sortie</h2>
-                    <p>Je me rappelle encore du jour où tu m'as invité au cinéma, c'était vraiment cool !</p>
-                </div>
-            </a>
-            <a href="souvenirs/resto.html">
-                <div class="souvenir">
-                    <h2>Notre premier resto</h2>
-                    <p>Je me souviens de notre premier resto ensemble, rempli de rires.</p>
-                </div>
-            </a>
-            <a href="souvenirs/anniversaire.html">
-                <div class="souvenir">
-                    <h2>Nos 1 an d'anniversaire</h2>
-                    <p>Je me rappelle de notre première anniversaire ensemble, la plus belle journée de ma vie jusqu'à là.</p>
-                </div>
-            </a>
-        </section>
-
-        <!-- Message spécial -->
-        <section class="message">
-            <h2>Pour mon Bb</h2>
-            <p>
-                Depuis le premier jour où je t'ai rencontré, jusqu'aujourd'hui je t'aime vraiment honnêtement et sincèrement. 
-                Malgré mes bêtises tu n'arrêtes pas de m'aimer
-                et je te remercie pour ça. Tu es vraiment une fille exceptionnelle, gentille, douce, attentionnée, drôle, belle et intelligente.
-                Je t'aime mon coeur je veux finir ma vie avec toi princesse.
-            </p>
-        </section>
+        </div>
+    </section>
+    
+    <!-- Modale d'indices -->
+    <div id="hintModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3>💡 Indices</h3>
+            <div class="hint-item">
+                <strong>Nom d'utilisateur</strong>
+                <p>C'est comment je t'appelle tendrement 😊</p>
+            </div>
+            <div class="hint-item">
+                <strong>Mot de passe: 01-02-2000</strong>
+                <p>Le jour où ont fêtent ❤️</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Cœurs qui tombent -->
-    <div class="hearts">
-        <span>💖</span>
-        <span>💕</span>
-        <span>💝</span>
-        <span>💗</span>
-        <span>💖</span>
-        <span>💕</span>
-        <span>💝</span>
-        <span>💗</span>
-        <span>💖</span>
-        <span>💕</span>
-        <span>💗</span>
-        <span>💖</span>
-        <span>💕</span>
-    </div>
+    <script>
+        // Gestion de la modale d'indices
+        const modal = document.getElementById('hintModal');
+        const hintButton = document.getElementById('hintButton');
+        const closeButton = document.querySelector('.modal-close');
+        
+        // Afficher la modale
+        hintButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Empêcher le défilement
+        });
+        
+        // Fermer la modale
+        closeButton.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Fermer en cliquant en dehors
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Gestion du formulaire
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Animation de chargement
+            const button = this.querySelector('button');
+            const originalText = button.textContent;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion...';
+            button.disabled = true;
+            
+            // Simulation de connexion
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.disabled = false;
+                
+                // Vérification des identifiants
+                if(username.toLowerCase() === 'dina' && password === '21-06-2024') {
+                    // Redirection vers index.html après connexion réussie
+                    window.location.href = 'main.html';
+                } else {
+                    alert('Identifiants incorrects. Réessaie mon amour ❤️');
+                }
+            }, 1500);
+        });
+        
+        // Ajout d'effets visuels interactifs
+        const circles = document.querySelectorAll('.circle');
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            circles.forEach((circle, index) => {
+                const moveX = (mouseX - 0.5) * 20 * (index + 1);
+                const moveY = (mouseY - 0.5) * 20 * (index + 1);
+                
+                circle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
 </body>
 </html>
